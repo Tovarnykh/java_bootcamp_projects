@@ -1,6 +1,7 @@
 package shoppingcart.models;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Cart {
@@ -45,11 +46,8 @@ public class Cart {
 	public void remove(String name) {
 		if (items.isEmpty()) {
 			throw new IllegalStateException("The list is empty!");
-		}
-		items.forEach(index -> {
-			if(index.getName().equals(name))
-				items.remove(index);
-		});
+		}	
+		items.removeIf(elem -> elem.getName().equals(name));
 	}
 	
 	/**
@@ -60,7 +58,7 @@ public class Cart {
 	 *   1. Calculates the subtitle (price before tax).
 	 *   2. Calculates the tax (assume tax is 13%).
 	 *   3. Calculates total: subtitle + tax
-	 *   4. Returns a String that resembles a receipt. See below.
+	 *   4. Returns a String that resembles a receipt.
 	 */
 	public String checkout() {
 		if (items.isEmpty()) {
@@ -83,5 +81,19 @@ public class Cart {
 	public boolean isEmpty() {
         return this.items.isEmpty();
     }
+	
+	/**
+	  * Function name: contains
+	  * @param item
+	  * @return (boolean)
+	  * 
+	  * Inside the function:
+	  *    1. checks if items list contains() item.
+	  */
+	
+	public boolean contains(Item item) {
+		return this.items.contains(item);
+		
+	}
 	
 }
